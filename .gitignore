@@ -1,0 +1,13 @@
+# skip files
+/heroku_account.txt
+
+
+# skip files
+*.log
+*.pot
+*.pyc
+__pycache__/
+.idea/
+
+# folders
+/venv/

@@ -8,3 +8,9 @@ repos:
         entry: ./hook_scripts/requirements.bat
         language: script
         exclude: venv/|upbit/|config/
+
+    -   id: git add requirement
+        name: git add requirement
+        entry: ./hook_scripts/git_add.bat
+        language: script
+        exclude: venv/|upbit/|config/

@@ -5,6 +5,6 @@ repos:
     hooks:
     -   id: make requirements
         name: make requirements
-        entry: cmd python -m pip freeze > requirements.txt
-        language: system
+        entry: ./hook_scripts/requirements.bat
+        language: script
         exclude: venv/|upbit/|config/

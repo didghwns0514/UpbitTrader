@@ -12,3 +12,4 @@ __pycache__/
 # folders
 /venv/
 /config/settings/myconfig.py
+/staticfiles/

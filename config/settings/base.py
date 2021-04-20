@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 import os
 import django_heroku
+import dj_database_url
 
 if os.getenv('IS_DEVELOP') != 'False':
     from .myconfig import SE_SECRET_KEY, SE_DATABASES_USER, SE_DATABASES_PSWD, SE_DATABASE_URL
@@ -35,10 +36,12 @@ DATABASES = {
         'NAME': 'upbit', #2
         'USER': SE_DATABASES_USER if not os.getenv('DATABASES_USER') else os.getenv('DATABASES_USER'), #3
         'PASSWORD': SE_DATABASES_PSWD if not os.getenv('DATABASES_PSWD') else os.getenv('DATABASES_PSWD'),  #4
-        'HOST': SE_DATABASE_URL if not os.getenv('DATABASE_URL' ) else os.getenv('DATABASE_URL'),   #5
+        'HOST': SE_DATABASE_URL if not os.getenv('DATABASE_URL') else os.getenv('DATABASE_URL'),   #5
         'PORT': '3306', #6
     }
 }
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
 
 
 # SECURITY WARNING: don't run with debug turned on in production!

@@ -16,7 +16,7 @@ import django_heroku
 import dj_database_url
 
 if os.getenv('IS_DEVELOP') != 'False':
-    from .myconfig import SE_SECRET_KEY, SE_DATABASES_USER, SE_DATABASES_PSWD, SE_DATABASE_URL
+    from .myconfig import SE_SECRET_KEY, SE_DATABASES_USER, SE_DATABASES_PSWD, SE_DATABASE_URL_RDS
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -36,7 +36,7 @@ DATABASES = {
         'NAME': 'upbit', #2
         'USER': SE_DATABASES_USER if not os.getenv('DATABASES_USER') else os.getenv('DATABASES_USER'), #3
         'PASSWORD': SE_DATABASES_PSWD if not os.getenv('DATABASES_PSWD') else os.getenv('DATABASES_PSWD'),  #4
-        'HOST': SE_DATABASE_URL if not os.getenv('DATABASE_URL') else os.getenv('DATABASE_URL'),   #5
+        'HOST': SE_DATABASE_URL_RDS if not os.getenv('DATABASE_URL_RDS') else os.getenv('DATABASE_URL_RDS'),   #5
         'PORT': '3306', #6
     }
 }

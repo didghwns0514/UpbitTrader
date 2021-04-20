@@ -11,9 +11,12 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
-from .myconfig import SE_SECRET_KEY, SE_DATABASES_USER, SE_DATABASES_PSWD, SE_DATABASE_URL
 import os
 import django_heroku
+
+if os.getenv('IS_DEVELOP') != 'False':
+    from .myconfig import SE_SECRET_KEY, SE_DATABASES_USER, SE_DATABASES_PSWD, SE_DATABASE_URL
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
@@ -24,24 +27,22 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = SE_SECRET_KEY
-SECRET_KEY = os.getenv(
-    'DJANGO_SECRET_KEY',
-    SE_SECRET_KEY)
+SECRET_KEY = SE_SECRET_KEY if not os.getenv('DJANGO_SECRET_KEY') else os.getenv('DJANGO_SECRET_KEY')
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', #1
         'NAME': 'upbit', #2
-        'USER': os.getenv('DATABASES_USER', SE_DATABASES_USER), #3
-        'PASSWORD': os.getenv('DATABASES_PSWD', SE_DATABASES_PSWD),  #4
-        'HOST': os.getenv('DATABASE_URL', SE_DATABASE_URL),   #5
+        'USER': SE_DATABASES_USER if not os.getenv('DATABASES_USER') else os.getenv('DATABASES_USER'), #3
+        'PASSWORD': SE_DATABASES_PSWD if not os.getenv('DATABASES_PSWD') else os.getenv('DATABASES_PSWD'),  #4
+        'HOST': SE_DATABASE_URL if not os.getenv('DATABASE_URL' ) else os.getenv('DATABASE_URL'),   #5
         'PORT': '3306', #6
     }
 }
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
+DEBUG = True if not os.environ.get('DJANGO_DEBUG') else bool(os.environ.get('DJANGO_DEBUG'))
 
 ALLOWED_HOSTS = []
 

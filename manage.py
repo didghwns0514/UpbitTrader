@@ -5,11 +5,11 @@ import sys
 
 # check dev / deploy
 env_string = 'config.settings.deploy' \
-    if not bool(os.environ.get('IS_DEVELOP', True)) \
+    if not bool(os.getenv('IS_DEVELOP', True)) \
     else 'config.settings.development'
 print(f'env_string : {env_string}')
-print(f'bool(os.environ.get("IS_DEVELOP", True)) : ', bool(os.environ.get('IS_DEVELOP', True)))
-print(f"os.environ.get('IS_DEVELOP') : {os.environ.get('IS_DEVELOP')}")
+print(f'bool(os.environ.get("IS_DEVELOP", True)) : ', bool(os.getenv('IS_DEVELOP', True)))
+print(f"os.environ.get('IS_DEVELOP') : {os.getenv('IS_DEVELOP')}")
 def main():
     """Run administrative tasks."""
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', env_string)

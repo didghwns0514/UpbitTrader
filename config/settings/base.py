@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = SE_SECRET_KEY
-SECRET_KEY = os.environ.get(
+SECRET_KEY = os.getenv(
     'DJANGO_SECRET_KEY',
     SE_SECRET_KEY)
 
@@ -32,9 +32,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', #1
         'NAME': 'upbit', #2
-        'USER': os.environ.get('DATABASES_USER', SE_DATABASES_USER), #3
-        'PASSWORD': os.environ.get('DATABASES_PSWD', SE_DATABASES_PSWD),  #4
-        'HOST': os.environ.get('DATABASE_URL', SE_DATABASE_URL),   #5
+        'USER': os.getenv('DATABASES_USER', SE_DATABASES_USER), #3
+        'PASSWORD': os.getenv('DATABASES_PSWD', SE_DATABASES_PSWD),  #4
+        'HOST': os.getenv('DATABASE_URL', SE_DATABASE_URL),   #5
         'PORT': '3306', #6
     }
 }

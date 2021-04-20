@@ -1,1 +1,1 @@
-web: gunicorn app_name:Upbit --log-file -
+web: gunicorn app_name:UpbitTrader --log-file -

@@ -3,10 +3,15 @@
 import os
 import sys
 
+# check dev / deploy
+env_string = 'config.settings.deploy' \
+    if not bool(os.environ.get('IS_DEVELOP', True)) \
+    else 'config.settings.development'
+print(f'env_string : {env_string}')
 
 def main():
     """Run administrative tasks."""
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings')
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', env_string)
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:

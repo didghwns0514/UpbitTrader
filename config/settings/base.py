@@ -42,9 +42,9 @@ DATABASES = {
 }
 print(f'DATABASES : {DATABASES}')
 
-db_from_env = dj_database_url.config(conn_max_age=500)
-print(f'db_from_env : {db_from_env}')
-DATABASES['default'].update(db_from_env)
+# db_from_env = dj_database_url.config(conn_max_age=500)
+# print(f'db_from_env : {db_from_env}')
+# DATABASES['default'].update(db_from_env)
 
 
 # SECURITY WARNING: don't run with debug turned on in production!

@@ -7,9 +7,7 @@ import sys
 env_string = 'config.settings.deploy' \
     if os.getenv('IS_DEVELOP') == 'False' \
     else 'config.settings.development'
-# print(f'env_string : {env_string}')
-# print(f'bool(os.getenv("IS_DEVELOP", True)) : ', bool(os.getenv('IS_DEVELOP', True)))
-# print(f"os.getenv('IS_DEVELOP') : {os.getenv('IS_DEVELOP')}")
+
 def main():
     """Run administrative tasks."""
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', env_string)

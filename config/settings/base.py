@@ -40,11 +40,9 @@ DATABASES = {
         'PORT': '3306', #6
     }
 }
-print(f'DATABASES : {DATABASES}')
-
 db_from_env = dj_database_url.config(conn_max_age=500)
-print(f'db_from_env : {db_from_env}')
 DATABASES['default'].update(db_from_env)
+print(f'DATABASES : {DATABASES}')
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -62,6 +60,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'Upbit.apps.UpbitConfig',
 ]
 
 MIDDLEWARE = [
@@ -144,6 +143,10 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# celery settings
+BROKER_URL = 'django://'
 
 # Activate Django-Heroku
 django_heroku.settings(locals())

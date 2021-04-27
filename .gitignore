@@ -13,3 +13,4 @@ __pycache__/
 /venv/
 /config/settings/myconfig.py
 /staticfiles/
+/APIKEY.txt

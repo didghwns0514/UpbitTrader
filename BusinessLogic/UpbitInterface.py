@@ -13,8 +13,7 @@ https://wikidocs.net/117438
 
 class UpbitAPI:
 
-    def __init__(self):
-        var_check_class = 'Upbit-api'
+    var_check_class = 'Upbit-api'
 
     @staticmethod
     def request_tick_data():

@@ -61,6 +61,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Upbit.apps.UpbitConfig',
+    'rest_framework',
+    'ml_predictor.apps.MlPredictorConfig'
 ]
 
 MIDDLEWARE = [

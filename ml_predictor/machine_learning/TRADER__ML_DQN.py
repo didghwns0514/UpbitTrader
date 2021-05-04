@@ -5,6 +5,7 @@ import os
 import typing
 import math
 import traceback
+import random
 
 #########################tensorflow / keras#################
 import tensorflow as tf

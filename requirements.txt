@@ -3,6 +3,7 @@ amqp==5.0.6
 appdirs==1.4.4
 APScheduler==3.7.0
 asgiref==3.3.4
+astor==0.8.1
 astunparse==1.6.3
 billiard==3.6.4.0
 cachetools==4.2.1
@@ -21,7 +22,7 @@ django-heroku==0.3.1
 djangorestframework==3.12.4
 filelock==3.0.12
 flatbuffers==1.12
-gast==0.3.3
+gast==0.2.2
 google-auth==1.30.0
 google-auth-oauthlib==0.4.4
 google-pasta==0.2.0
@@ -33,6 +34,7 @@ idna==2.10
 importlib-metadata==4.0.0
 importlib-resources==5.1.2
 Keras==2.4.3
+Keras-Applications==1.0.8
 Keras-Preprocessing==1.1.2
 kombu==5.0.2
 Markdown==3.3.4
@@ -56,11 +58,11 @@ rsa==4.7.2
 scipy==1.5.4
 six==1.15.0
 sqlparse==0.4.1
-tensorboard==2.5.0
+tensorboard==1.15.0
 tensorboard-data-server==0.6.0
 tensorboard-plugin-wit==1.8.0
-tensorflow==2.4.1
-tensorflow-estimator==2.4.0
+tensorflow==1.15.0
+tensorflow-estimator==1.15.1
 termcolor==1.1.0
 toml==0.10.2
 typing-extensions==3.7.4.3

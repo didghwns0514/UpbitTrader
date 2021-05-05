@@ -1,0 +1,1 @@
+python manage.py runserver --noreload --setting=settings.development

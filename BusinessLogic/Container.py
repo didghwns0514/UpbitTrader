@@ -2,10 +2,13 @@ import pandas as pd
 import datetime
 import traceback
 
+from .Async_module import async_wrapper
 from transitions import Machine
 from django.db.models import Q
 
 import pyupbit
+
+
 
 class Container:
 	"""
@@ -30,27 +33,30 @@ class Container:
 	def past_data_wrapper(self, n_days=2, count=200, to=datetime.datetime.now()):
 		"""wrapper for get_pas_data function"""
 		request_num = int(n_days) * 24 * 60
+		iteration= range(request_num//count + 1 )
+		arg_function = [ self.get_past_data for _ in iteration]
+		arg_param = [[count, to - datetime.timedelta(minutes=200*i)] for i in iteration ]
 
-		df_concat = self.get_past_data(count, to)
+		#print(f'arg_function : {arg_function}, arg_param : {arg_param}')
 
-		while isinstance(df_concat, pd.DataFrame) and request_num >= 0 :
-			to = to - datetime.timedelta(minutes=200)
-			tmp_df = self.get_past_data(count, to)
-			if isinstance(tmp_df, pd.DataFrame): #
-				df_concat = pd.concat([df_concat, tmp_df])
-				request_num -= count
-			else:
-				break
-		if isinstance(df_concat, pd.DataFrame):
-			print(f'df_concat head : {df_concat.head(10)}')
-			print(f'df_concat tail : {df_concat.tail(10)}')
-			print(f'df_concat length : {len(df_concat)}')
+		df_container = async_wrapper(arg_function, arg_param)
+		#print(f'df_container : {df_container}')
+		df_container = [df for df in df_container if isinstance(df, pd.DataFrame)]
 
-		else:
-			print(f'error!')
-
+		df_checker = [isinstance(df, pd.DataFrame) for df in df_container  ]
+		print(f'df_checker : {df_checker}')
+		tmp_concat = None
+		if not df_container:
+			return
+		else: # has more than one
+			tmp_concat = df_container[0]
+			for i, tmp_df in enumerate(df_container):
+				if i >= 1:
+					tmp_concat = pd.concat([tmp_concat, tmp_df])
+		#print(f'tmp_concat : {tmp_concat}')
 		print(f'\n'*2)
-		return df_concat
+		return tmp_concat
+
 
 	def get_past_data(self, _count, _to):
 		""" get minute 2days data"""
@@ -60,14 +66,7 @@ class Container:
 			count=_count,
 			to = _to
 		)
-		# print(f'_to in data req : {_to}')
-		# if isinstance(df, pd.DataFrame):
-		# 	print(f'name : {self._coinName} ')
-		# 	print(f'df : {df}')
-		# else:
-		# 	print(f'error......!')
-		# 	print(f'name : {self._coinName} ')
-		# 	print(f'df : {df}')
+
 
 		return df
 

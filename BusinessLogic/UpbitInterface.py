@@ -1,11 +1,14 @@
+if __name__ == '__main__':
+    from Container import Container
+else:
+    from .Container import Container
 
-from .Container import Container
 from threading import Thread
-
 import datetime
 import time
 import os
 import pyupbit
+
 
 if os.getenv('IS_DEVELOP') != 'False':
     from config.settings.myconfig import Q_SECRET_KEY, Q_ACCESS_KEY
@@ -46,3 +49,6 @@ class UpbitInterface:
         print(f'in upbit API : {UpbitInterface.var_check_class}', datetime.datetime.now())
 
 
+if __name__ == '__main__':
+    """to test fetching data"""
+    tmp_obj = UpbitInterface()

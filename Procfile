@@ -1,1 +1,1 @@
-web: gunicorn app_name:UpbitTrader --log-file -
+web: gunicorn UpbitTrader.wsgi --log-file -

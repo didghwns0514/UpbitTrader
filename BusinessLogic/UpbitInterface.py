@@ -29,7 +29,7 @@ class Upbit:
         print(f'total tickers : {len(self._tickers)}')
         self._lookup = {}
 
-        self.createContainers()
+        #self.createContainers()
 
     def createContainers(self):
 

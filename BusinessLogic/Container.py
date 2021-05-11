@@ -1,7 +1,7 @@
 if __name__ == '__main__':
-	from Sub_APIs.GetData import Minute
+	from Sub_APIs.GetData import *
 else:
-	from .Sub_APIs.GetData import Minute
+	from .Sub_APIs.GetData import *
 
 import traceback
 

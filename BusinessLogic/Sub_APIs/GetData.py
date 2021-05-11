@@ -21,7 +21,8 @@ class Minute:
 
 	def __init__(self): pass
 
-	def nonasync_past_data_wrapper(self, n_days=2, count=200, to=datetime.datetime.now()):
+	@staticmethod
+	def nonasync_past_data_wrapper( _coinName, n_days=2, count=200, to=datetime.datetime.now()):
 		_type = 2
 		request_num = int(n_days) * 24 * 60
 		#print(f'request_num//count : {request_num//count}, request_num % count : {request_num % count} ')
@@ -33,21 +34,22 @@ class Minute:
 
 		for time_value in arg_param:
 			if _type == 1:
-				df = self.get_past_data(_count=count, _to=time_value)
+				df = Minute.get_past_data(_count=count, _to=time_value)
 				if isinstance(df, pd.DataFrame):
 					print('True')
 				else:
 					print('False')
 				time.sleep(0.01)
 			elif _type == 2:
-				rtn = self.api_get_pas_data(self._coinName, _count=count, _to=time_value)
+				rtn = Minute.api_get_pas_data(_coinName, _count=count, _to=time_value)
 				print(rtn)
 
-	def past_data_wrapper(self, n_days=2, count=200, to=datetime.datetime.now()):
+	@staticmethod
+	def past_data_wrapper(n_days=2, count=200, to=datetime.datetime.now()):
 		"""wrapper for get_pas_data function"""
 		request_num = int(n_days) * 24 * 60
 		iteration= range(request_num//count + 1 )
-		arg_function = [ self.get_past_data for _ in iteration]
+		arg_function = [ Minute.get_past_data for _ in iteration]
 		arg_param = [[count, (to - datetime.timedelta(minutes=200*i)).strftime("%m-%d-%Y %H:%M:%S")] for i in iteration ]
 
 		#print(f'arg_function : {arg_function}, arg_param : {arg_param}')
@@ -70,12 +72,12 @@ class Minute:
 		print(f'\n'*2)
 		return tmp_concat
 
-
-	def get_past_data(self, _count, _to):
+	@staticmethod
+	def get_past_data( _coinName, _count, _to):
 		""" get minute 2days data"""
 
 		df = pyupbit.get_ohlcv(
-			ticker=self._coinName,
+			ticker=_coinName,
 			interval="minute1",
 			count=_count,
 			to = _to
@@ -83,8 +85,8 @@ class Minute:
 
 		return df
 
-
-	def api_get_pas_data(self, coin_name, _count, _to):
+	@staticmethod
+	def api_get_pas_data(coin_name, _count, _to):
 		#url = "https://api.upbit.com/v1/candles/minutes/1"
 		url = "https://crix-api-endpoint.upbit.com/v1/crix/candles/minutes/1"
 		queryString = {

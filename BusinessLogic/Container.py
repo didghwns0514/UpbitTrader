@@ -1,7 +1,9 @@
 if __name__ == '__main__':
+	print(f'is main!')
 	from Sub_APIs.GetData import *
 else:
-	from .Sub_APIs.GetData import *
+	print('is not main!')
+	from BusinessLogic.Sub_APIs.GetData import *
 
 import traceback
 
@@ -25,7 +27,7 @@ class Container:
 
 		try:
 			#self.past_data_wrapper(n_days=
-			self.nonasync_past_data_wrapper(n_days=1)
+			Minute.nonasync_past_data_wrapper(self._coinName, n_days=1)
 		except Exception as e:
 			print(f'error : {e}')
 			traceback.print_exc()

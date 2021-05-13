@@ -8,6 +8,7 @@ import datetime
 import time
 import os
 import pyupbit
+import pandas as pd
 
 
 if os.getenv('IS_DEVELOP') != 'False':
@@ -26,16 +27,34 @@ class Upbit:
     def __init__(self, marketName="KRW"):
         self._marketName = marketName
         self._tickers = pyupbit.get_tickers(fiat=self._marketName)
-        print(f'total tickers : {len(self._tickers)}')
         self._lookup = {}
 
-        #self.createContainers()
+        self.createContainers()
+        self.getCandleData()
+        self.analysisCandleData()
 
     def createContainers(self):
 
         for coin_name in self._tickers:
             if coin_name not in self._lookup:
                 self._lookup[coin_name] = Container(coin_name)
+
+
+    def getCandleData(self):
+
+        for coin_name in self._lookup:
+            self._lookup[coin_name].getCandleData()
+
+
+    def analysisCandleData(self):
+        cnt = 0
+        for coin_name in self._lookup:
+            if isinstance(self._lookup[coin_name]._coin_candle, pd.DataFrame):
+                cnt += 1
+                tmp_ratio = round(len(self._lookup[coin_name]._coin_candle) / self._lookup[coin_name]._coin_candle_max_length, 2)
+                print(tmp_ratio)
+        print(f'total df : {cnt}')
+
 
 
 class UpbitInterface:

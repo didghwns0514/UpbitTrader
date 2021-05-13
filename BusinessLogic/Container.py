@@ -25,14 +25,17 @@ class Container:
 		self._coin_curr_price = None
 		self._coin_curr_volume = None
 
+		self._coin_candle = None
+		self._coin_candle_max_length = None
+
+	def getCandleData(self):
 		try:
 			#self.past_data_wrapper(n_days=
-			Minute.nonasync_past_data_wrapper(self._coinName, n_days=1)
+			#Minute.nonasync_past_data_wrapper(self._coinName, n_days=1)
+			self._coin_candle, self._coin_candle_max_length = Minute.past_data_wrapper(self._coinName)
 		except Exception as e:
 			print(f'error : {e}')
 			traceback.print_exc()
-
-
 
 
 class State:
